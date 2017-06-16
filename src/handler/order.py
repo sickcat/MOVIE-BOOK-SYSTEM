@@ -21,5 +21,7 @@ class OrderHandler(tornado.web.RequestHandler):
 				order = [], alert = 1, alert_msg = "Please Login First")
 		else:
 			order = mysql.get_order(user_id)
+			if order==None:
+				order = []
 			self.render('order.html', cookieName = username,
 				order = order, alert = 0, alert_msg = "")
