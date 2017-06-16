@@ -1,0 +1,48 @@
+{%extends 'main.html'%}
+{%include 'head.html'%}
+{%block content%}
+<div class='row' id="top">
+<div class='col-md-12'>
+	<img src='{{movie["img"]}}' width=100% class='img-rounded' />
+</div>
+</div>
+
+<hr/>
+
+<div class='row'>
+<div class='h3 text-center text-muted'>
+{{movie['movie_name']}}
+</div>	
+</div>
+
+<div class='row'>
+<div class='h3 text-center text-muted'>
+{{movie['length']}}
+</div>	
+</div>
+
+<div class='row'>
+	<div class="h3 dropdown text-center">
+        select a cinema and goto book
+    </div>
+</div>
+<div class='row'>
+	<ul class='nav nav-stacked'>
+		{%if cinema == None%}
+			<li><a class='btn btn-warning'>This Movie is not shown in any cinemas</a></li>
+		{%else%}
+			{%for i in cinema%}
+				{%for j in showin_list[str(i["cinema_id"])]%}
+					<li><a href='/buy/{{i["cinema_id"]}}_{{j["showin_id"]}}_{{movie["movie_id"]}}' class='btn btn-success'>{{i["cinema_name"]}}<br>{{j["start_at"]}}</a></li>
+				{%end%}
+				<li class="divider"></li>
+			{%end%}
+		{%end%}
+	</ul>
+</div>
+
+<div class='h3 row text-center'>
+	<button type="button" class="btn btn-info btn-lg text-center"><a href="#top">RETURN TOP</a></button>
+</div>
+{%end%}
+

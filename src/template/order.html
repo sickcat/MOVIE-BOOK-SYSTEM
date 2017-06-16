@@ -1,0 +1,32 @@
+{%extends 'main.html'%}
+{%include 'head.html'%}
+{%block content%}
+<div class="panel-group" id="accordion">
+	{%for each in order%}
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse{{each['order_id']}}">
+					THE ORDER_ID IS: {{each['order_id']}}
+				</a>
+			</h4>
+		</div>
+		<div id="collapse{{each['order_id']}}" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<div class='row'>
+					TIME:{{each['order_at']}}
+				</div>
+				<div class="row">
+					CINEMA_ID:{{each['cinema_id']}}
+				</div>
+				<div class="row">
+					MOVIE_ID:{{each['movie_id']}}
+				</div>
+			</div>
+		</div>
+	</div>
+	{%end%}
+</div>
+{%end%}
+

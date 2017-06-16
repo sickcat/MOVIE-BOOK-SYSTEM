@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <link href='demo.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="jQuery.js"></script> 
+<script type="text/javascript" src="jquery.seat-charts.min.js"></script>
+<script type="text/javascript" src="my.js"></script> 
+    <title>BMTicketBook</title>
+    </head>
+<body>
+    <div class="demo"> 
+   <div id="seat-map"> 
+    <div class="front">屏幕</div>
+     <div id='server-seat-map'>'aaaaaaaaaa', 
+            'aaaaaaaaaa', 
+            '__________', 
+            'aaaaaaaa__', 
+            'aaaaaaaaaa', 
+            'aaaaaaaaaa', 
+            'aaaaaaaaaa', 
+            'aaaaaaaaaa', 
+            'aaaaaaaaaa', 
+            'aa__aa__aa' </div>      
+</div> 
+<div class="booking-details"> 
+    <p>影片：<span>星际穿越3D</span></p> 
+    <p>时间：<span>11月14日 21:00</span></p> 
+    <p>座位：</p> 
+    <ul id="selected-seats"></ul> 
+    <p>票数：<span id="counter">0</span></p> 
+    <p>总计：<b>￥<span id="total">0</span></b></p>   
+    <button class="checkout-button" onclick="post()">确定购买</button> 
+    <div id="legend"></div> 
+</div> 
+</div> 
+</body>
+</html>

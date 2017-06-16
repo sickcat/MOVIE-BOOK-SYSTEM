@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BMTicketBook</title>
+		<link href='/static/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <link href='/static/hacker.css' rel='stylesheet' type='text/css'>
+		<script src='/static/jquery-2.1.1.min.js'></script>
+		<script src='/static/bootstrap.min.js'></script>
+		<script>
+			function loadXMLMsg()
+			{
+				var xmlhttp;
+				xmlhttp=new XMLHttpRequest();
+				xmlhttp.onreadystatechange=function()
+				{
+					if(xmlhttp.readyState==4&&xmlhttp.status==200)
+					{
+						if(xmlhttp.responseText=='0')
+						{
+							document.getElementById('msg').innerHTML="<a href='/message/1_1' class='h4 text-info navbar-text'><strong><i>新消息</i></a><label class='text-danger'>news</label>";
+						}
+						else
+						{
+							document.getElementById('msg').innerHTML="<a href='/message/1_1' class=''>消 息</a>";
+						}
+					}
+				}
+				xmlhttp.open('GET','/bling',true);
+				xmlhttp.send();
+			}
+			function doUpdate()
+			{
+				loadXMLMsg();
+				window.setTimeout('doUpdate()',60000);
+			}
+		</script>
+		<script>
+			function sureToLogout()
+			{
+				var res=confirm('确定注销登录吗？');
+				if(res)
+				{
+					location.href='/logout';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!--header-->
+		{%block header%}
+		{%end%}
+		<!--/header-->
+        <div class='container' role='content'>   <!--content-->
+		{%block content%}
+		{%end%}
+        </div>
+		<footer>
+		{%block footer%}
+		{%end%}
+		</footer>
+	</body>
+</html>

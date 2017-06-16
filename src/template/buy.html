@@ -1,0 +1,94 @@
+{%extends 'main.html'%}
+{%include 'head.html'%}
+{%block content%}
+<div class='row' id="top">
+<div class='col-md-12'>
+	<img src="{{movie['img']}}" width=100% class='img-rounded' />
+</div>
+</div>
+
+<hr/>
+
+<div class='row'>
+<div class='h3 text-center text-muted'>
+{{movie['movie_name']}}
+</div>	
+</div>
+
+<div class='row'>
+<div class='h3 text-center text-muted'>
+{{movie['length']}}
+</div>	
+</div>
+<div class='row text-center text-muted'>
+<div class="btn-group">
+	{%for i in range(5)%}
+		<div class="btn-group-vertical">
+			{%for j in range(5)%}
+				<!--
+				{{flag = 1}}
+				-->
+				<div>
+					{%for k in seat_list%}
+						{%if str(j)+'_'+str(i) == k%}
+							<button type="button" class="btn btn-default" value="{{j}}_{{i}}" onclick="
+							if (window.event.target.getAttribute('class') == 'btn btn-default') {
+								event.target.setAttribute('class', 'btn btn-success');
+								var book = document.getElementById('bookseat');
+								book.value = book.value + event.target.value + ',';
+							
+							}
+							else {
+								event.target.setAttribute('class', 'btn btn-default');
+								var book = document.getElementById('bookseat');
+								var books = book.value.split(',');
+								for(i = 0; i < books.length; i++){
+									if(books[i] == event.target.value) {
+										books.splice(i, 1);
+										i = i - 1;
+										books.length--;
+									}
+								}
+								book.value = '';
+								for(i = 0; i < books.length; i++)
+									book.value = book.value + books[i] + ',';
+							}
+							">{{j}}_{{i}}
+							</button>
+							<!--
+							{{flag = 0}}
+							-->
+							{%break%}
+						{%end%}
+					{%end%}
+					{%if flag == 1%}
+							<button type="button" class="btn btn-danger" value="{{j}}_{{i}}">
+							{{j}}_{{i}}
+							</button>
+					{%end%}
+				</div>
+			{%end%}
+		</div>
+	{%end%}
+</div>
+</div>
+<div class='row text-center text-muted'>
+	<form role="form" action='/buy/{{cinema_id}}_{{showin_id}}_{{movie["movie_id"]}}' method='post' class='well'>
+		<div class = "form-group">
+			<label for="name">YOU BOOK LIST:
+			<br>
+			</label>
+			<input type='text' id="bookseat" class='form-control' name='booklist' readonly="true"></input>
+		</div>
+		{%if not cookieName%}
+		<div class="btn btn-danger">YOU SHOULD LOGIN FIRST TO BOOK A TICKET</div>
+		{%else%}
+		<button type='submit' class='btn btn-primary' onclick="return true">submit</button>
+		{%end%}
+	</form>
+</div>
+<div class='h3 row text-center'>
+	<button type="button" class="btn btn-info btn-lg text-center"><a href="#top">RETURN TOP</a></button>
+</div>
+{%end%}
+
